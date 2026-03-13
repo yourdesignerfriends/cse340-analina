@@ -1,6 +1,33 @@
+/****** Global variables ******/
+:root {
+  --primary: #09adcb;   
+  --secondary: #000000;
+  --accent: #ffffff;
+}
 /******* Change Box Model ***************/
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+}
+/******** Global Styles *********/
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  color: var(--secondary);
+}
+/******** Large Viewports *********/
+@media (min-width: 768px) {
+  body {
+    background-image: url("/images/site/small_check.jpg");
+    background-repeat: repeat;
+  }
+    #wrapper {
+    max-width: 1200px;
+    margin: auto;
+    background-color: var(--accent);
+    border: 8px solid var(--primary);
+    border-radius: 12px;
+    padding: 1rem;
+  }
 }
