@@ -45,6 +45,7 @@ body {
   padding: 0;
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 #main-navigation li {
   flex: 1;
@@ -57,6 +58,44 @@ body {
 #main-navigation li:hover {
   background-color: var(--accent); 
   color: var(--secondary); 
+}
+/******** Hero Section Home Page *********/
+#hero {
+  position: relative;
+  color: var(--primary);
+}
+#hero .hero-image {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+#hero h1 {
+  font-weight: 700;
+  color: var(--secondary);
+}
+.hero-box {
+  position: absolute;
+  top: 20%;
+  left: 5%;
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 1rem;
+  max-width: 200px;
+}
+.hero-btn {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--primary);
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.hero-btn:hover {
+  background-color: var(--accent);
+  color: var(--secondary);
+  box-shadow: 0 0 10px var(--primary);
 }
 /******** Large Viewports *********/
 @media (min-width: 768px) {
