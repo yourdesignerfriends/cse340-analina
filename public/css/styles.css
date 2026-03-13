@@ -16,6 +16,48 @@ body {
   font-weight: 400;
   color: var(--secondary);
 }
+/******** Header *********/
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+#top-header a {
+  text-decoration: none;
+  color: var(--secondary);
+  font-weight: 600;
+}
+#top-header a:hover {
+  text-shadow: 0 0 8px var(--primary);
+}
+.siteName a {
+  font-size: 1.5rem;
+}
+/******** Navigation *********/
+#main-navigation {
+  background-color: var(--secondary);
+  border: 2px solid var(--secondary);
+}
+#main-navigation ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+}
+#main-navigation li {
+  flex: 1;
+  text-align: center;
+  color: var(--accent);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 0.7rem;
+}
+#main-navigation li:hover {
+  background-color: var(--accent); 
+  color: var(--secondary); 
+}
 /******** Large Viewports *********/
 @media (min-width: 768px) {
   body {
