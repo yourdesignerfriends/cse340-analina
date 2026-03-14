@@ -62,7 +62,6 @@ body {
 /******** Hero Section Home Page *********/
 #hero {
   position: relative;
-  color: var(--primary);
 }
 #hero .hero-image {
   display: block;
@@ -72,7 +71,6 @@ body {
 }
 #hero h1 {
   font-weight: 700;
-  color: var(--secondary);
 }
 .hero-box {
   position: absolute;
