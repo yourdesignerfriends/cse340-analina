@@ -10,3 +10,9 @@ WHERE account_id = 1;
 -- Query 3: DELETE tested successfully in pgAdmin
 DELETE FROM account
 WHERE account_id = 1;
+
+-- Query 4: I replaced only "small interiors" with "a huge interior" as required. 
+-- I did not adjust the surrounding "the" because it is outside the exact phrase the assignment asked me to modify.
+UPDATE inventory
+SET inv_description = REPLACE(inv_description, 'small interiors', 'a huge interior')
+WHERE inv_make = 'GM' AND inv_model = 'Hummer';
