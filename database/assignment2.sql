@@ -16,3 +16,11 @@ WHERE account_id = 1;
 UPDATE inventory
 SET inv_description = REPLACE(inv_description, 'small interiors', 'a huge interior')
 WHERE inv_make = 'GM' AND inv_model = 'Hummer';
+
+-- Query 5: INNER JOIN for Sport vehicles, successfully tested in pgAdmin.
+-- I joined inventory with classification and filtered by 'Sport' to return the two Sport records required by the assignment.
+SELECT inventory.inv_make, inventory.inv_model, classification.classification_name
+FROM inventory
+INNER JOIN classification
+	ON inventory.classification_id = classification.classification_id
+WHERE classification.classification_name = 'Sport';
