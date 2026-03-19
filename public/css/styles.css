@@ -59,6 +59,13 @@ body {
   background-color: var(--accent); 
   color: var(--secondary); 
 }
+#main-navigation a {
+  color: var(--accent);
+  text-decoration: none;
+}
+#main-navigation li:hover a {
+  color: var(--secondary);
+}
 /******** Hero Section Home Page *********/
 #hero {
   position: relative;
