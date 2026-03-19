@@ -1,0 +1,12 @@
+<!-- Main heading: shows the title passed from the controller -->
+<% if (title) { %>
+    <h1><%= title %></h1>
+<% } else {
+    res.redirect('/')
+} %>
+
+<!-- Message block (disabled for now, will be used later) -->
+<%# messages() %>
+
+<!-- Displays the vehicle grid built in the utilities function -->
+<%- grid %>
