@@ -66,7 +66,7 @@ Util.buildDetailHTML = function (vehicle) {
     <div class="vehicle-detail-layout"> 
         <img class="vehicle-image"
             src="${vehicle.inv_image}" 
-            alt="Image of ${vehicle.inv_make} ${vehicle.inv_model}">
+            alt="${vehicle.inv_make} ${vehicle.inv_model}">
         <div class="vehicle-text">
             <h2 class="detail-subtitle">
                 ${vehicle.inv_year}
