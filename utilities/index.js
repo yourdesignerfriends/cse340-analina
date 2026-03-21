@@ -36,7 +36,7 @@ Util.buildClassificationGrid = async function(data){
             // Vehicle link + image
             grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
             + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
-            + ' details"><img src="' + vehicle.inv_thumbnail +'" alt="'+ vehicle.inv_make + ' ' + vehicle.inv_model +'"></a>'
+            + ' details"><img src="' + vehicle.inv_thumbnail +'" alt="Image of'+ vehicle.inv_make + ' ' + vehicle.inv_model +'"></a>'
             // Name + price container
             grid += '<div class="namePrice">'
             grid += '<hr>'
@@ -60,7 +60,7 @@ Util.buildClassificationGrid = async function(data){
 }
 
 /* ***************************
-*  Custom function that will take the specific vehicle's information and wrap it up in 
+* Custom function that will take the specific vehicle's information and wrap it up in 
 * HTML to deliver to the view, I use backticks (template literals) to build the HTML because it is easier to read.
  * ************************** */
 Util.buildDetailHTML = function (vehicle) {
