@@ -134,6 +134,38 @@ body {
   display: block;
   margin-top: 0.5rem;
 }
+/******** buildDetailHTML *********/
+.detail-subtitle {
+  font-size: 1.6rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+.vehicle-image {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.vehicle-info {
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+.info-item {
+  margin: 0.6rem 0;
+}
+.info-item.highlight {
+  background: rgba(0, 0, 0, 0.08);
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+}
+.info-label {
+  font-weight: bold;
+  color: #222;
+}
+/******** Footer *********/
+footer {
+  padding: 0.6rem 0;
+}
 /******** Large Viewports *********/
 @media (min-width: 768px) {
   body {
@@ -160,5 +192,17 @@ body {
   }
   #reviews li {
     margin-bottom: 1.3rem;
+  }
+  .vehicle-detail-layout {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+  .vehicle-image {
+    max-width: 50%;
+    margin: 0;
+  }
+  .vehicle-text {
+    flex: 1;
   }
 }
