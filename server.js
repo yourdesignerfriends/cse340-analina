@@ -12,6 +12,7 @@ const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
+const errorRoute = require("./routes/errorRoute")
 const utilities = require("./utilities/")
 
 /* ***********************
@@ -19,7 +20,7 @@ const utilities = require("./utilities/")
 *************************/
 app.set("view engine", "ejs")
 app.use(expressLayouts)
-app.set("layout", "./layouts/layout") // not at views root
+app.set("layout", "./layouts/layout")
 
 /* ***********************
 * Routes
@@ -35,6 +36,11 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 * Inventory routes
 ******************************* */
 app.use("/inv", inventoryRoute)
+
+/* *******************************
+* Intentional Error Route (week 3 - Task 3)
+******************************* */
+app.use("/error", errorRoute)
 
 /* *******************************
 * File Not Found Route - must be last route in list
