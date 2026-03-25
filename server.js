@@ -16,6 +16,7 @@ const errorRoute = require("./routes/errorRoute")
 const utilities = require("./utilities/")
 const session = require("express-session")
 const pool = require('./database/')
+const accountRoute = require("./routes/accountRoute")
 
 /* ***********************
  * Middleware
@@ -49,6 +50,11 @@ app.set("layout", "./layouts/layout")
 * Routes
 *************************/
 app.use(static)
+
+/* *******************************
+* Account routes
+******************************* */
+app.use("/account", require("./routes/accountRoute"))
 
 /* *******************************
 * Index route
