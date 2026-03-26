@@ -1,4 +1,4 @@
-const utilities = require(".")
+const utilities = require("../utilities/")
     const { body, validationResult } = require("express-validator")
     const validate = {}
     const accountModel = require("../models/account-model")
@@ -56,6 +56,8 @@ validate.registationRules = () => {
  * Check data and return errors or continue to registration
  * ***************************** */
 validate.checkRegData = async (req, res, next) => {
+    // Best practice: the client must re-enter the password.
+    // The password value is NOT returned to the view for security reasons.
     const { account_firstname, account_lastname, account_email } = req.body
     let errors = []
     errors = validationResult(req)
