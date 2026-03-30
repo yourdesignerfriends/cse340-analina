@@ -308,6 +308,33 @@ footer {
   color: var(--secondary);
   box-shadow: 0 0 6px var(--secondary);
 }
+.notice {
+  color: red;
+}
+/******** Management view HTML *********/
+.management-links {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+.management-links li {
+  margin: 0.5rem 0;
+}
+.management-links a {
+  display: inline-block;
+  color: var(--secondary);
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.4rem 0.6rem;
+  border: 2px solid var(--secondary);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+.management-links a:hover {
+  background-color: var(--secondary);
+  color: var(--accent);
+  box-shadow: 0 0 6px rgba(0,0,0,0.4);
+}
 /******** Large Viewports *********/
 @media (min-width: 768px) {
   body {

@@ -64,28 +64,41 @@ Util.buildClassificationGrid = async function(data){
 * HTML to deliver to the view, I use backticks (template literals) to build the HTML because it is easier to read.
  * ************************** */
 Util.buildDetailHTML = function (vehicle) {
-  let detailHTML = `
-    <div class="vehicle-detail-layout"> 
-        <img class="vehicle-image"
-            src="${vehicle.inv_image}" 
-            alt="${vehicle.inv_make} ${vehicle.inv_model}">
-        <div class="vehicle-text">
-            <h2 class="detail-subtitle">
-                ${vehicle.inv_year}
-                ${vehicle.inv_make} 
-                ${vehicle.inv_model}
-                Details
-            </h2>
-            <div class="vehicle-info">
-                <p class="info-item highlight"><span class="info-label">Price: </span>$${new Intl.NumberFormat().format(vehicle.inv_price)}</p>
-                <p class="info-item"><span class="info-label">Description: </span>${vehicle.inv_description}</p>
-                <p class="info-item"><span class="info-label">Color: </span>${vehicle.inv_color}</p>
-                <p class="info-item"><span class="info-label">Miles: </span>${new Intl.NumberFormat().format(vehicle.inv_miles)}</p>
+    let detailHTML = `
+        <div class="vehicle-detail-layout"> 
+            <img class="vehicle-image"
+                src="${vehicle.inv_image}" 
+                alt="${vehicle.inv_make} ${vehicle.inv_model}">
+            <div class="vehicle-text">
+                <h2 class="detail-subtitle">
+                    ${vehicle.inv_year}
+                    ${vehicle.inv_make} 
+                    ${vehicle.inv_model}
+                    Details
+                </h2>
+                <div class="vehicle-info">
+                    <p class="info-item highlight"><span class="info-label">Price: </span>$${new Intl.NumberFormat().format(vehicle.inv_price)}</p>
+                    <p class="info-item"><span class="info-label">Description: </span>${vehicle.inv_description}</p>
+                    <p class="info-item"><span class="info-label">Color: </span>${vehicle.inv_color}</p>
+                    <p class="info-item"><span class="info-label">Miles: </span>${new Intl.NumberFormat().format(vehicle.inv_miles)}</p>
+                </div>
             </div>
         </div>
-    </div>
-  `
-  return detailHTML
+    `
+    return detailHTML
+}
+
+/* **************************************
+* Build the management view HTML
+* ************************************ */
+Util.buildManagementHTML = function () {
+    let html = `
+        <ul class="management-links">
+            <li><a href="/inv/add-classification">Add New Classification</a></li>
+            <li><a href="/inv/add-inventory">Add New Inventory</a></li>
+        </ul>
+    `
+    return html
 }
 
 /* ****************************************

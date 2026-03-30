@@ -41,4 +41,23 @@ invCont.buildDetailView = async function (req, res, next) {
     }
 }
 
+/* ***************************
+*  Deliver Management View
+* ************************** */
+invCont.buildManagement = async function (req, res, next) {
+  try {
+    const nav = await utilities.getNav()
+    const managementHTML = utilities.buildManagementHTML()
+
+    res.render("inventory/management", {
+        title: "Inventory Management",
+        nav,
+        managementHTML,
+        errors: null,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = invCont

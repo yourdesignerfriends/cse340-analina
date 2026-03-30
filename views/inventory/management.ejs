@@ -1,0 +1,15 @@
+<!-- 1. Create a new management view inside the views > inventory folder. -->
+
+<!-- 2. The view should contain an appropriate title and h1 value 
+to represent its role as a management view for all things dealing with inventory. -->
+<h1><%= title %></h1>
+
+<!-- 3. The view must be capable of displaying a flash message sent from the existing inventory controller. -->
+<% if (locals.message) { %>
+    <div class="notice"><%= message %></div>
+<% } %>
+
+<!-- 4. The view should contain two links (no links are directly to a view, all must use the MVC approach):
+- One to trigger a process to deliver an add new classification view (see Task 2).
+- One to trigger a process to deliver an add new inventory view (see Task 3). -->
+<%- managementHTML %>
