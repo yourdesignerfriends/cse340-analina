@@ -1,8 +1,10 @@
 const invModel = require("../models/inventory-model")
 const Util = {}
 
+/* =========================  Navigation Builder  ========================= */
+
 /* ************************
- * Constructs the nav HTML unordered list
+ * Build the navigation menu HTML
  ************************** */
 Util.getNav = async function (req, res, next) {
     let data = await invModel.getClassifications()
@@ -24,8 +26,10 @@ Util.getNav = async function (req, res, next) {
     return list
 }
 
+/* =========================  Public HTML Builders  ========================= */
+
 /* **************************************
-* Build the classification view HTML
+* Build the classification grid HTML 
 * ************************************ */
 Util.buildClassificationGrid = async function(data){
     let grid
@@ -60,6 +64,7 @@ Util.buildClassificationGrid = async function(data){
 }
 
 /* ***************************
+* Build the vehicle detail HTML
 * Custom function that will take the specific vehicle's information and wrap it up in 
 * HTML to deliver to the view, I use backticks (template literals) to build the HTML because it is easier to read.
  * ************************** */
@@ -88,6 +93,8 @@ Util.buildDetailHTML = function (vehicle) {
     return detailHTML
 }
 
+/* ======================  Administrative HTML Builders  ====================== */
+
 /* **************************************
 * Build the management view HTML
 * ************************************ */
@@ -97,6 +104,37 @@ Util.buildManagementHTML = function () {
             <li><a href="/inv/add-classification">Add New Classification</a></li>
             <li><a href="/inv/add-inventory">Add New Inventory</a></li>
         </ul>
+    `
+    return html
+}
+
+/* **************************************
+* Build the add classification form HTML
+* ************************************ */
+Util.buildAddClassificationForm = function (classification_name = "") {
+    let html = `
+
+        <div class="form-container">
+            <p class="required-msg">FIELD IS REQUIRED.</p>
+            <form action="/inv/add-classification" method="post" class="classification-form">
+
+                <label for="classification_name">Classification Name</label>
+
+                <p class="input-rules">NAME MUST BE 3-25 ALPHABETIC CHARACTERS ONLY.</p>
+
+                <input 
+                    type="text" 
+                    id="classification_name" 
+                    name="classification_name" 
+                    required
+                    pattern="^[A-Za-z]{3,25}$"
+                    title="Only alphabetic characters, 3-25 letters"
+                    value="${classification_name}"
+                >
+
+                <button type="submit">Add Classification</button>
+            </form>
+        </div>
     `
     return html
 }

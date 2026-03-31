@@ -3,6 +3,8 @@ const utilities = require("../utilities/")
 
 const invCont = {}
 
+/* =========================  Public Inventory Views  ========================= */
+
 /* ***************************
  *  Build inventory by classification view
  * ************************** */
@@ -41,6 +43,8 @@ invCont.buildDetailView = async function (req, res, next) {
     }
 }
 
+/* ======================  Administrative Inventory Views  ====================== */
+
 /* ***************************
 *  Deliver Management View
 * ************************** */
@@ -54,10 +58,51 @@ invCont.buildManagement = async function (req, res, next) {
         nav,
         managementHTML,
         errors: null,
+        message: req.flash("notice") 
     })
   } catch (error) {
     next(error)
   }
 }
+
+/* ***************************
+*  Deliver Add Classification View
+* ************************** */
+invCont.buildAddClassification = async function (req, res, next) {
+    try {
+        const nav = await utilities.getNav()
+        const classificationForm = utilities.buildAddClassificationForm()
+
+        res.render("inventory/add-classification", {
+            title: "Add New Classification",
+            nav,
+            classificationForm,
+            errors: null
+        })
+    }   catch (error) {
+        next(error)
+    }
+}
+
+/* ***************************
+*  Process Add Classification
+* ************************** */
+invCont.addClassification = async function (req, res, next) {
+    try {
+        const { classification_name } = req.body
+        const result = await invModel.addClassification(classification_name)
+
+        if (result) {
+            req.flash("notice", `Classification "${classification_name}" added successfully.`)
+            res.redirect("/inv/")
+        } else {
+            req.flash("notice", "Failed to add classification.")
+            res.redirect("/inv/add-classification")
+        }
+    } catch (error) {
+        next(error)
+    }
+}
+
 
 module.exports = invCont

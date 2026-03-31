@@ -330,11 +330,62 @@ footer {
   border-radius: 4px;
   transition: all 0.3s ease;
 }
-.management-links a:hover {
+.management-links a:hover,
+.classification-form button:hover {
   background-color: var(--secondary);
   color: var(--accent);
   box-shadow: 0 0 6px rgba(0,0,0,0.4);
 }
+
+.required-msg {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: red;
+}
+
+.form-container {
+  border: var(--primary) 6px solid;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  margin-top: 10px;
+  margin: 0 auto;
+}
+
+.classification-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.classification-form label {
+  font-weight: bold;
+}
+
+.input-rules {
+  font-size: 0.9rem;
+  margin-bottom: -5px;
+}
+
+.classification-form input {
+  padding: 8px;
+  border-radius: 4px;
+  border: var(--secondary) 2px solid;
+}
+
+.classification-form button {
+  margin-top: 10px;
+  padding: 0.7rem;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  color: var(--secondary);
+  background-color: var(--accent);
+  border: 2px solid var(--secondary);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
 /******** Large Viewports *********/
 @media (min-width: 768px) {
   body {
