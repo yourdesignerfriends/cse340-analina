@@ -28,4 +28,18 @@ router.post(
     utilities.handleErrors(invController.addClassification)
 )
 
+// Route to deliver the Add Inventory view (Task 3)
+router.get(
+    "/add-inventory",
+    utilities.handleErrors(invController.buildAddInventory)
+)
+
+// Route to process the Add Inventory form (Task 3 step 3)
+router.post(
+    "/add-inventory",
+    invValidate.inventoryRules(),
+    invValidate.checkInventoryData,
+    utilities.handleErrors(invController.addInventory)
+)
+
 module.exports = router;

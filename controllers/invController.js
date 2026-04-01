@@ -104,5 +104,71 @@ invCont.addClassification = async function (req, res, next) {
     }
 }
 
+/* ***************************
+ *  Deliver Add Inventory View
+ * ************************** */
+invCont.buildAddInventory = async function (req, res, next) {
+    try {
+        const nav = await utilities.getNav()
+
+        const classificationList = await utilities.buildClassificationList()
+
+        const inventoryForm = utilities.buildAddInventoryForm({}, classificationList)
+
+        res.render("inventory/add-inventory", {
+            title: "Add New Inventory",
+            nav,
+            errors: null,
+            message: null,
+            inventoryForm
+        })
+    }   catch (error) {
+            next(error)
+    }
+}
+
+/* ***************************
+ *  Process Add Inventory
+ * ************************** */
+invCont.addInventory = async function (req, res, next) {
+    try {
+        const {
+            inv_make,
+            inv_model,
+            inv_year,
+            inv_description,
+            inv_image,
+            inv_thumbnail,
+            inv_price,
+            inv_miles,
+            inv_color,
+            classification_id
+        } = req.body
+
+        // Insert into database
+        const result = await invModel.addInventory(
+            inv_make,
+            inv_model,
+            inv_year,
+            inv_description,
+            inv_image,
+            inv_thumbnail,
+            inv_price,
+            inv_miles,
+            inv_color,
+            classification_id
+        )
+
+        if (result) {
+            req.flash("notice", `${inv_make} ${inv_model} added successfully.`)
+            res.redirect("/inv/")
+        } else {
+            req.flash("notice", "Failed to add inventory item.")
+            res.redirect("/inv/add-inventory")
+        }
+    } catch (error) {
+        next(error)
+    }
+}
 
 module.exports = invCont

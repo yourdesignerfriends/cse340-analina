@@ -31,4 +31,83 @@ invValidate.checkClassificationData = async (req, res, next) => {
     next()
 }
 
+/* ***************************
+ * Inventory Validation Rules
+ * ************************** */
+invValidate.inventoryRules = () => {
+    return [
+        body("classification_id")
+            .trim()
+            .isInt({ min: 1 })
+            .withMessage("Please choose a classification."),
+
+        body("inv_make")
+            .trim()
+            .matches(/^[A-Za-z ]{3,}$/)
+            .withMessage("Make must be at least 3 alphabetic characters."),
+
+        body("inv_model")
+            .trim()
+            .matches(/^[A-Za-z ]{3,}$/)
+            .withMessage("Model must be at least 3 alphabetic characters."),
+
+        body("inv_description")
+            .trim()
+            .isLength({ min: 1 })
+            .withMessage("Please provide a description."),
+
+        body("inv_image")
+            .trim()
+            .matches(/^\/images\/vehicles\/.+/)
+            .withMessage("Image path must start with /images/vehicles/"),
+
+        body("inv_thumbnail")
+            .trim()
+            .matches(/^\/images\/vehicles\/.+/)
+            .withMessage("Thumbnail path must start with /images/vehicles/"),
+
+        body("inv_price")
+            .trim()
+            .matches(/^[0-9]{1,9}$/)
+            .withMessage("Price must be 1-9 digits."),
+
+        body("inv_year")
+            .trim()
+            .matches(/^[0-9]{4}$/)
+            .withMessage("Year must be exactly 4 digits."),
+
+        body("inv_miles")
+            .trim()
+            .matches(/^[0-9]+$/)
+            .withMessage("Miles must contain digits only."),
+
+        body("inv_color")
+            .trim()
+            .matches(/^[A-Za-z ]+$/)
+            .withMessage("Color must contain letters and spaces only.")
+    ]
+}
+
+/* ***************************
+ * Check inventory data
+ * ************************** */
+invValidate.checkInventoryData = async (req, res, next) => {
+    const errors = validationResult(req)
+
+    if (!errors.isEmpty()) {
+        const nav = await utilities.getNav()
+        const classificationList = await utilities.buildClassificationList(req.body.classification_id)
+        const inventoryForm = utilities.buildAddInventoryForm(req.body, classificationList)
+
+        return res.render("inventory/add-inventory", {
+            title: "Add New Inventory",
+            nav,
+            errors,
+            message: null,
+            inventoryForm
+        })
+    }
+    next()
+}
+
 module.exports = invValidate

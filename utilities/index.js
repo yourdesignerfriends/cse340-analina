@@ -140,6 +140,145 @@ Util.buildAddClassificationForm = function (classification_name = "") {
 }
 
 /* ****************************************
+ * Build the classification select list HTML
+ **************************************** */
+Util.buildClassificationList = async function (classification_id = null) {
+    let data = await invModel.getClassifications()
+    let classificationList =
+        '<select name="classification_id" id="classificationList" required>'
+    classificationList += "<option value=''>Choose a Classification</option>"
+
+    data.rows.forEach((row) => {
+        classificationList += '<option value="' + row.classification_id + '"'
+        if (
+            classification_id != null &&
+            row.classification_id == classification_id
+        ) {
+            classificationList += " selected "
+        }
+        classificationList += ">" + row.classification_name + "</option>"
+    })
+
+    classificationList += "</select>"
+    return classificationList
+}
+
+/* **************************************
+* Build the add inventory form HTML
+* ************************************ */
+Util.buildAddInventoryForm = function (data = {}, classificationList) {
+    let html = `
+        <div class="form-container">
+            <p class="required-msg">ALL FIELDS ARE REQUIRED.</p>
+
+            <form action="/inv/add-inventory" method="post" class="inventory-form">
+
+                <label for="classificationList">Classification</label>
+                ${classificationList}
+
+                <label for="inv_make">Make</label>
+                <input 
+                    type="text" 
+                    id="inv_make" 
+                    name="inv_make" 
+                    required
+                    pattern="^[A-Za-z ]{3,}$"
+                    placeholder="Min of 3 characters"
+                    value="${data.inv_make || ""}"
+                >
+
+                <label for="inv_model">Model</label>
+                <input 
+                    type="text" 
+                    id="inv_model" 
+                    name="inv_model" 
+                    required
+                    pattern="^[A-Za-z ]{3,}$"
+                    placeholder="Min of 3 characters"
+                    value="${data.inv_model || ""}"
+                >
+
+                <label for="inv_description">Description</label>
+                <textarea 
+                    id="inv_description" 
+                    name="inv_description"
+                    placeholder="Describe the vehicle..." 
+                    required
+                >${data.inv_description || ""}</textarea>
+
+                <label for="inv_image">Image Path</label>
+                <input 
+                    type="text" 
+                    id="inv_image" 
+                    name="inv_image" 
+                    required
+                    pattern="^/images/vehicles/.+"
+                    value="${data.inv_image || "/images/vehicles/no-image.png"}"
+                >
+
+                <label for="inv_thumbnail">Thumbnail Path</label>
+                <input 
+                    type="text" 
+                    id="inv_thumbnail" 
+                    name="inv_thumbnail" 
+                    required
+                    pattern="^/images/vehicles/.+"
+                    value="${data.inv_thumbnail || "/images/vehicles/no-image-tn.png"}"
+                >
+
+                <label for="inv_price">Price</label>
+                <input 
+                    type="text" 
+                    id="inv_price" 
+                    name="inv_price" 
+                    required
+                    pattern="^[0-9]{1,9}$"
+                    inputmode="numeric"
+                    placeholder="Integer only"
+                    value="${data.inv_price || ""}"
+                >
+
+                <label for="inv_year">Year</label>
+                <input 
+                    type="text" 
+                    id="inv_year" 
+                    name="inv_year" 
+                    required
+                    pattern="[0-9]{4}"
+                    placeholder="4-digit year"
+                    value="${data.inv_year || ""}"
+                >
+
+                <label for="inv_miles">Miles</label>
+                <input 
+                    type="text" 
+                    id="inv_miles" 
+                    name="inv_miles" 
+                    required
+                    pattern="^[0-9]+$"
+                    placeholder="Digits only"
+                    value="${data.inv_miles || ""}"
+                >
+
+                <label for="inv_color">Color</label>
+                <input 
+                    type="text" 
+                    id="inv_color" 
+                    name="inv_color" 
+                    required
+                    pattern="^[A-Za-z ]+$"
+                    placeholder="Vehicle color"
+                    value="${data.inv_color || ""}"
+                >
+
+                <button type="submit">Add Vehicle</button>
+            </form>
+        </div>
+    `
+    return html
+}
+
+/* ****************************************
 * Middleware For Handling Errors
 * Wrap other function in this for 
 * General Error Handling
