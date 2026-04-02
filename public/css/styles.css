@@ -196,30 +196,32 @@ body {
 footer {
   padding: 0.6rem 0;
 }
-/******** Login View *********/
-.login-form {
+/************************* Forms *******************************/
+
+/* Base form layout */
+.base-form {
   background-color: var(--primary);
   padding: 1.5rem;
-  border-radius: 8px;
-  max-width: 350px;
-  margin: 1.5rem auto;
+  border-radius: 10px;
+  max-width: 400px;
+  margin: 2rem auto;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   color: var(--accent);
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  box-shadow: 0 0 12px rgba(0,0,0,0.25);
 }
-.login-form label {
+.base-form label {
   font-weight: 600;
 }
-.login-form input {
-  padding: 0.6rem;
+.base-form input {
+  padding: 0.7rem;
   border: none;
   border-radius: 4px;
   font-size: 1rem;
 }
-.login-form button {
-  padding: 0.7rem;
+.base-form button {
+  padding: 0.8rem;
   background-color: var(--secondary);
   color: var(--accent);
   border: none;
@@ -228,11 +230,12 @@ footer {
   cursor: pointer;
   transition: all 0.3s ease;
 }
-.login-form button:hover {
+.base-form button:hover {
   background-color: var(--accent);
   color: var(--secondary);
   box-shadow: 0 0 10px var(--secondary);
 }
+/******** Login View *********/
 .register-link {
   text-align: center;
   margin-top: 1rem;
@@ -246,42 +249,6 @@ footer {
   text-shadow: 0 0 8px var(--primary);
 }
 /******** Registration View *********/
-.register-form {
-  background-color: var(--primary);
-  padding: 1.5rem;
-  border-radius: 10px;
-  max-width: 400px;
-  margin: 2rem auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  color: var(--accent);
-  box-shadow: 0 0 12px rgba(0,0,0,0.25);
-}
-.register-form label {
-  font-weight: 600;
-}
-.register-form input {
-  padding: 0.7rem;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-.register-form button {
-  padding: 0.8rem;
-  background-color: var(--secondary);
-  color: var(--accent);
-  border: none;
-  border-radius: 4px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.register-form button:hover {
-  background-color: var(--accent);
-  color: var(--secondary);
-  box-shadow: 0 0 10px var(--secondary);
-}
 .password-rules {
   font-size: 0.9rem;
   color: var(--accent);
