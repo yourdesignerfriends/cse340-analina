@@ -486,6 +486,21 @@ Util.checkLogin = (req, res, next) => {
 }
 
 /* ****************************************
+* Check Employee or Admin Middleware
+* Only allow access if account_type is Employee or Admin
+**************************************** */
+Util.checkEmployee = (req, res, next) => {
+    const accountType = res.locals.accountData?.account_type
+
+    if (accountType === "Employee" || accountType === "Admin") {
+        return next()
+    }
+
+    req.flash("notice", "You do not have permission to access this page.")
+    return res.redirect("/account/login")
+}
+
+/* ****************************************
 * Middleware For Handling Errors
 * Wrap other function in this for 
 * General Error Handling
