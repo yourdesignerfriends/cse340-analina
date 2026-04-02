@@ -42,4 +42,7 @@ router.post(
     utilities.handleErrors(invController.addInventory)
 )
 
+// Route used by the management view JavaScript to fetch inventory data by classification_id
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
 module.exports = router;

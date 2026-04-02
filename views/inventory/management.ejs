@@ -13,3 +13,15 @@ to represent its role as a management view for all things dealing with inventory
 - One to trigger a process to deliver an add new classification view (see Task 2).
 - One to trigger a process to deliver an add new inventory view (see Task 3). -->
 <%- managementHTML %>
+
+<h2>Manage Inventory</h2>
+
+<p>Select a classification to see the inventory items.</p>
+
+<%- classificationSelect %>
+
+<table id="inventoryDisplay"></table>
+
+<noscript>JavaScript must be enabled to use this page.</noscript>
+
+<script src="../../js/inventory.js"></script>
