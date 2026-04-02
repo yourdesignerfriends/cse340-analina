@@ -220,4 +220,66 @@ invCont.buildEditInventory = async function (req, res, next) {
   }
 }
 
+/* ***************************
+ *  Update Inventory Data
+ * ************************** */
+invCont.updateInventory = async function (req, res, next) {
+  try {
+    const nav = await utilities.getNav()
+
+    const {
+        inv_id,
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_id
+    } = req.body
+
+    // Attempt update
+    const updateResult = await invModel.updateInventory(
+        inv_id,
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_id
+    )
+
+    if (updateResult) {
+        const itemName = `${updateResult.inv_make} ${updateResult.inv_model}`
+        req.flash("notice", `The ${itemName} was successfully updated.`)
+        return res.redirect("/inv/")
+    }
+
+    // If update failed:
+    const classificationList = await utilities.buildClassificationList(classification_id)
+    const inventoryForm = utilities.buildEditInventoryForm(req.body, classificationList)
+    const itemName = `${inv_make} ${inv_model}`
+
+    req.flash("notice", "Sorry, the update failed.")
+    return res.status(501).render("inventory/edit-inventory", {
+        title: "Edit " + itemName,
+        nav,
+        errors: null,
+        message: null,
+        inventoryForm,
+        inv_id
+    })
+
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = invCont

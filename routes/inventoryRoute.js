@@ -51,7 +51,7 @@ router.get("/edit/:inv_id", utilities.handleErrors(invController.buildEditInvent
 router.post(
   "/update",
   invValidate.inventoryRules(),
-  invValidate.checkInventoryData,
+  invValidate.checkUpdateData,
   utilities.handleErrors(invController.updateInventory)
 )
 
