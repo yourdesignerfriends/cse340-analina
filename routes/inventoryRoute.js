@@ -45,4 +45,14 @@ router.post(
 // Route used by the management view JavaScript to fetch inventory data by classification_id
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 
+// Route to deliver the Edit Inventory view
+router.get("/edit/:inv_id", utilities.handleErrors(invController.buildEditInventory))
+// Route to process the Edit Inventory form
+router.post(
+  "/update",
+  invValidate.inventoryRules(),
+  invValidate.checkInventoryData,
+  utilities.handleErrors(invController.updateInventory)
+)
+
 module.exports = router;

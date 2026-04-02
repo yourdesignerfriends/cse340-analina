@@ -186,4 +186,38 @@ invCont.getInventoryJSON = async (req, res, next) => {
     }
 }
 
+/* ***************************
+ *  Build Edit Inventory View
+ * ************************** */
+invCont.buildEditInventory = async function (req, res, next) {
+  try {
+    const inv_id = parseInt(req.params.inv_id)
+
+    // Navigation
+    let nav = await utilities.getNav()
+
+    // Get the inventory item data
+    const itemData = await invModel.getInventoryById(inv_id)
+    const item = itemData[0]
+
+    // Build classification select list with the current classification selected
+    const classificationSelect = await utilities.buildClassificationList(item.classification_id)
+
+    // Build the edit form HTML using your new utility function
+    const editForm = utilities.buildEditInventoryForm(item, classificationSelect)
+
+    // Build the item name for the title
+    const itemName = `${item.inv_make} ${item.inv_model}`
+
+    res.render("./inventory/edit-inventory", {
+      title: "Edit " + itemName,
+      nav,
+      errors: null,
+      editForm
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = invCont

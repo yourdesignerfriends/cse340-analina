@@ -283,6 +283,116 @@ Util.buildAddInventoryForm = function (data = {}, classificationList) {
     return html
 }
 
+/* **************************************
+* Build the edit inventory form HTML
+* ************************************ */
+Util.buildEditInventoryForm = function (data = {}, classificationList) {
+    let html = `
+        <div class="form-container">
+            <p class="required-msg">ALL FIELDS ARE REQUIRED.</p>
+
+            <form action="/inv/update" method="post" class="inventory-form">
+
+                <input type="hidden" name="inv_id" value="${data.inv_id}">
+
+                <label for="classificationList">Classification</label>
+                ${classificationList}
+
+                <label for="inv_make">Make</label>
+                <input 
+                    type="text" 
+                    id="inv_make" 
+                    name="inv_make" 
+                    required
+                    pattern="^[A-Za-z ]{3,}$"
+                    value="${data.inv_make}"
+                >
+
+                <label for="inv_model">Model</label>
+                <input 
+                    type="text" 
+                    id="inv_model" 
+                    name="inv_model" 
+                    required
+                    pattern="^[A-Za-z ]{3,}$"
+                    value="${data.inv_model}"
+                >
+
+                <label for="inv_description">Description</label>
+                <textarea 
+                    id="inv_description" 
+                    name="inv_description"
+                    required
+                >${data.inv_description}</textarea>
+
+                <label for="inv_image">Image Path</label>
+                <input 
+                    type="text" 
+                    id="inv_image" 
+                    name="inv_image" 
+                    required
+                    pattern="^/images/vehicles/.+"
+                    value="${data.inv_image}"
+                >
+
+                <label for="inv_thumbnail">Thumbnail Path</label>
+                <input 
+                    type="text" 
+                    id="inv_thumbnail" 
+                    name="inv_thumbnail" 
+                    required
+                    pattern="^/images/vehicles/.+"
+                    value="${data.inv_thumbnail}"
+                >
+
+                <label for="inv_price">Price</label>
+                <input 
+                    type="text" 
+                    id="inv_price" 
+                    name="inv_price" 
+                    required
+                    pattern="^[0-9]{1,9}$"
+                    inputmode="numeric"
+                    value="${data.inv_price}"
+                >
+
+                <label for="inv_year">Year</label>
+                <input 
+                    type="text" 
+                    id="inv_year" 
+                    name="inv_year" 
+                    required
+                    pattern="[0-9]{4}"
+                    value="${data.inv_year}"
+                >
+
+                <label for="inv_miles">Miles</label>
+                <input 
+                    type="text" 
+                    id="inv_miles" 
+                    name="inv_miles" 
+                    required
+                    pattern="^[0-9]+$"
+                    value="${data.inv_miles}"
+                >
+
+                <label for="inv_color">Color</label>
+                <input 
+                    type="text" 
+                    id="inv_color" 
+                    name="inv_color" 
+                    required
+                    pattern="^[A-Za-z ]+$"
+                    value="${data.inv_color}"
+                >
+
+                <button type="submit">Update Vehicle</button>
+            </form>
+        </div>
+    `
+    return html
+}
+
 /* ****************************************
 * Middleware to check token validity
 **************************************** */
