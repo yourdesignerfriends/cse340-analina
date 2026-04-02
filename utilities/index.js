@@ -393,6 +393,61 @@ Util.buildEditInventoryForm = function (data = {}, classificationList) {
     return html
 }
 
+/* **************************************
+* Build the delete inventory form HTML
+* ************************************ */
+Util.buildDeleteInventoryForm = function (data = {}) {
+    let html = `
+        <div class="form-container">
+            <p class="required-msg">Confirm Deletion – This action cannot be undone.</p>
+
+            <form action="/inv/delete" method="post" class="inventory-form">
+
+                <input type="hidden" name="inv_id" value="${data.inv_id}">
+
+                <label for="inv_make">Make</label>
+                <input 
+                    type="text" 
+                    id="inv_make" 
+                    name="inv_make" 
+                    value="${data.inv_make}"
+                    readonly
+                >
+
+                <label for="inv_model">Model</label>
+                <input 
+                    type="text" 
+                    id="inv_model" 
+                    name="inv_model" 
+                    value="${data.inv_model}"
+                    readonly
+                >
+
+                <label for="inv_year">Year</label>
+                <input 
+                    type="text" 
+                    id="inv_year" 
+                    name="inv_year" 
+                    value="${data.inv_year}"
+                    readonly
+                >
+
+                <label for="inv_price">Price</label>
+                <input 
+                    type="text" 
+                    id="inv_price" 
+                    name="inv_price" 
+                    value="${data.inv_price}"
+                    readonly
+                >
+
+                <button type="submit" class="delete-btn">Delete Vehicle</button>
+            </form>
+        </div>
+    `
+    return html
+}
+
 /* ****************************************
 * Middleware to check token validity
 **************************************** */

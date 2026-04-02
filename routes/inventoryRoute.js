@@ -55,4 +55,16 @@ router.post(
   utilities.handleErrors(invController.updateInventory)
 )
 
+// Route to deliver the Delete Confirmation view
+router.get(
+  "/delete/:inv_id",
+  utilities.handleErrors(invController.buildDeleteInventory)
+)
+
+// Route to process the Delete Inventory form
+router.post(
+  "/delete",
+  utilities.handleErrors(invController.deleteInventory)
+)
+
 module.exports = router;
