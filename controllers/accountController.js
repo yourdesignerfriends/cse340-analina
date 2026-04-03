@@ -12,6 +12,7 @@ async function buildLogin(req, res, next) {
   res.render("account/login", {
     title: "Login",
     nav,
+    errors: null
   })
 }
 
@@ -66,6 +67,7 @@ async function registerAccount(req, res) {
     res.status(201).render("account/login", {
       title: "Login",
       nav,
+      errors: null,
     })
   } else {
     req.flash("notice", "Sorry, the registration failed.")
@@ -88,7 +90,7 @@ async function accountLogin(req, res) {
   const accountData = await accountModel.getAccountByEmail(account_email)
 
   if (!accountData) {
-    req.flash("notice", "Please check your credentials and try again.")
+    req.flash("notice", "The email or password you entered is incorrect.")
     res.status(400).render("account/login", {
       title: "Login",
       nav,
@@ -109,7 +111,7 @@ async function accountLogin(req, res) {
       return res.redirect("/account/")
     }
     else {
-      req.flash("message notice", "Please check your credentials and try again.")
+      req.flash("message notice", "The email or password you entered is incorrect.")
       res.status(400).render("account/login", {
         title: "Login",
         nav,

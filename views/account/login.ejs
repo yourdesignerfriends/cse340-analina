@@ -1,28 +1,41 @@
 <h1><%= title %></h1>
 
 <%- messages() %>
-
-<form action="/account/login" method="post" class="base-form">
-    <label for="account_email">Email</label>
-    <input type="email" id="account_email" name="account_email" required>
-
-    <label for="account_password">Password</label>
-    
-    <input 
-        type="password" 
-        id="account_password" 
-        name="account_password" 
-        required
-        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
-
-    <p class="password-rules">
-        Password must be at least 12 characters, contain 1 capital letter, 1 number, and 1 special character.
+<% if (errors) { %>
+    <ul class="notice">
+        <% errors.array().forEach(error => { %>
+            <li><%= error.msg %></li>
+        <% }) %>
+    </ul>
+<% } %>
+<div class="base-form-container">
+    <img src="/images/site/icon.png" alt="Company brand logo">
+    <h2>Log in to your account</h2>
+    <form class="base-form" action="/account/login" method="post">
+        <label for="account_email">Email</label>
+        <input 
+            type="email" 
+            id="account_email"
+            placeholder="Enter your email" 
+            name="account_email" 
+            required
+            value="<%= locals.account_email %>"
+        >
+        <label for="account_password">Password</label>
+        <div class="password-wrapper">
+            <input 
+                type="password" 
+                id="account_password"
+                placeholder="Enter your password" 
+                name="account_password" 
+                required
+            >
+            <span id="togglePassword" class="toggle-password">Show</span>
+        </div>     
+        <button type="submit">Login</button>
+    </form>
+    <p class="register-link">
+        Don't have an account?
+        <a href="/account/register">Register here</a>
     </p>
-    
-    <button type="submit">Login</button>
-</form>
-
-<p class="register-link">
-    Don't have an account?
-    <a href="/account/register">Register here</a>
-</p>
+</div>

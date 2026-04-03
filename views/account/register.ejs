@@ -8,33 +8,56 @@
         <% }) %>
     </ul>
 <% } %>
-
-<form action="/account/register" method="post" class="base-form">
-    <label for="account_firstname">First Name</label>
-    <input type="text" name="account_firstname" id="accountFirstname" required value="<%= locals.account_firstname %>">
-
-    <label for="account_lastname">Last Name</label>
-    <input type="text" name="account_lastname" id="accountLastname" required value="<%= locals.account_lastname %>">
-
-    <label for="account_email">Email</label>
-    <input type="email" name="account_email" id="accountEmail" required value="<%= locals.account_email %>">
-
-    <label for="account_password">Password</label>
-    <div class="password-wrapper">
+<div class="base-form-container">
+    <img src="/images/site/icon.png" alt="Company brand logo">
+    <h2>Create your account</h2>
+    <form class="base-form" action="/account/register" method="post">
+        
+        <label for="accountFirstname">First Name</label>
         <input 
-            type="password" 
-            id="account_password" 
-            name="account_password" 
-            required
-            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
-        <span id="togglePassword" class="toggle-password">Show</span>
-    </div>
+            type="text" 
+            name="account_firstname" 
+            id="accountFirstname"
+            placeholder="Enter your first name" 
+            required 
+            value="<%= locals.account_firstname %>"
+        >
+        <label for="accountLastname">Last Name</label>
+        <input 
+            type="text" 
+            name="account_lastname" 
+            id="accountLastname"
+            placeholder="Enter your last name"
+            required 
+            value="<%= locals.account_lastname %>"
+        >
+        <label for="accountEmail">Email</label>
+        <input 
+            type="email" 
+            name="account_email" 
+            id="accountEmail"
+            placeholder="Enter your email" 
+            required 
+            value="<%= locals.account_email %>"
+        >
+        <label for="accountPassword">Password</label>
+        <div class="password-wrapper">
+            <input 
+                type="password"  
+                name="account_password"
+                id="accountPassword"
+                placeholder="Enter your password" 
+                required
+                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+            >
+            <span id="togglePassword" class="toggle-password">Show</span>
+        </div>
 
-    <p class="password-rules">
-        Password must be at least 12 characters, contain 1 capital letter, 1 number, and 1 special character.
-    </p>
+        <p class="password-rules">
+            Password must be at least 12 characters, contain 1 capital letter, 1 number, and 1 special character.
+        </p>
 
-    <button type="submit">Register</button>
-</form>
-
+        <button type="submit">Register</button>
+    </form>
+</div>
 <script src="/js/register.js"></script>
