@@ -111,4 +111,81 @@ validate.checkLoginData = async (req, res, next) => {
     next()
 }
 
+/* ******************************
+* Update Account Validation Rules
+* ***************************** */
+validate.updateAccountRules = () => {
+    return [
+        body("account_firstname")
+            .trim()
+            .escape()
+            .notEmpty()
+            .withMessage("First name is required."),
+
+        body("account_lastname")
+            .trim()
+            .escape()
+            .notEmpty()
+            .withMessage("Last name is required."),
+
+        body("account_email")
+            .trim()
+            .isEmail()
+            .withMessage("A valid email is required.")
+    ]
+}
+
+/* ******************************
+* Check Update Account Data
+* ***************************** */
+validate.checkUpdateAccountData = async (req, res, next) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        let nav = await utilities.getNav()
+        return res.render("account/update-account", {
+            title: "Update Account Information",
+            nav,
+            errors,
+            accountData: req.body
+        })
+    }
+    next()
+}
+
+/* ******************************
+* Update Password Validation Rules
+* ***************************** */
+validate.updatePasswordRules = () => {
+return [
+    body("account_password")
+        .trim()
+        .notEmpty()
+        .isStrongPassword({
+            minLength: 12,
+            minLowercase: 1,
+            minUppercase: 1,
+            minNumbers: 1,
+            minSymbols: 1
+        })
+        .withMessage("Password does not meet requirements.")
+    ]
+}
+
+/* ******************************
+* Check Update Password Data
+* ***************************** */
+validate.checkUpdatePasswordData = async (req, res, next) => {
+const errors = validationResult(req)
+if (!errors.isEmpty()) {
+        let nav = await utilities.getNav()
+        return res.render("account/update-account", {
+            title: "Update Account Information",
+            nav,
+            errors,
+            accountData: req.body
+        })
+    }
+    next()
+}
+
 module.exports = validate

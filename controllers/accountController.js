@@ -142,4 +142,96 @@ async function buildAccountManagement(req, res, next) {
   })
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement }
+/* ****************************************
+*  Deliver Update Account view
+* *************************************** */
+async function buildUpdateAccount(req, res, next) {
+  let nav = await utilities.getNav()
+
+  const account_id = parseInt(req.params.account_id)
+  const accountData = await accountModel.getAccountById(account_id)
+
+  res.render("account/update-account", {
+    title: "Update Account Information",
+    nav,
+    errors: null,
+    accountData
+  })
+}
+
+/* ****************************************
+*  Process Account Update
+* *************************************** */
+async function updateAccount(req, res) {
+  let nav = await utilities.getNav()
+  const { account_firstname, account_lastname, account_email, account_id } = req.body
+
+  const updateResult = await accountModel.updateAccount(
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id
+  )
+
+  if (updateResult) {
+    req.flash("notice", "Account information updated successfully.")
+    return res.redirect("/account/")
+  }
+
+  req.flash("notice", "Update failed.")
+  res.render("account/update-account", {
+    title: "Update Account Information",
+    nav,
+    errors: null,
+    accountData: req.body
+  })
+}
+
+/* ****************************************
+*  Process Password Update
+* *************************************** */
+async function updatePassword(req, res) {
+  let nav = await utilities.getNav()
+  const { account_password, account_id } = req.body
+
+  const hashedPassword = await bcrypt.hash(account_password, 10)
+
+  const updateResult = await accountModel.updatePassword(
+    hashedPassword,
+    account_id
+  )
+
+  if (updateResult) {
+    req.flash("notice", "Password updated successfully.")
+    return res.redirect("/account/")
+  }
+
+  req.flash("notice", "Password update failed.")
+  res.render("account/update-account", {
+    title: "Update Account Information",
+    nav,
+    errors: null,
+    accountData: req.body
+  })
+}
+
+/* ****************************************
+*  Logout Process
+* *************************************** */
+async function logout(req, res) {
+  res.clearCookie("jwt")
+  req.flash("notice", "You have been logged out.")
+  return res.redirect("/")
+}
+
+module.exports = { 
+  buildLogin, 
+  buildRegister, 
+  registerAccount, 
+  accountLogin, 
+  buildAccountManagement, 
+  buildUpdateAccount, 
+  updateAccount, 
+  updatePassword, 
+  logout 
+}
