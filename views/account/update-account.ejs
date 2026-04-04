@@ -3,72 +3,88 @@
 <%- messages() %>
 
 <% if (errors) { %>
-<div class="errors"><%= errors %></div>
+    <ul class="notice">
+        <% errors.array().forEach(error => { %>
+            <li><%= error.msg %></li>
+        <% }) %>
+    </ul>
 <% } %>
 
-<!-- ========================= -->
-<!-- Account Update Form       -->
-<!-- ========================= -->
-<h2>Account Update</h2>
+<!-- Week 5 Task 5 -->
+ <!-- Change account information Form -->
+<div class="base-form-container">
+    <img src="/images/site/icon.png" alt="Company brand logo">
+    <h2>Account Update</h2>
+    <form class="base-form" action="/account/update" method="post">
 
-<form action="/account/update" method="post" class="account-form">
+        <label for="account_firstname">First Name</label>
+        <input 
+            type="text" 
+            id="account_firstname" 
+            name="account_firstname" 
+            required
+            value="<%= accountData.account_firstname %>"
+        >
 
-<label for="account_firstname">First Name</label>
-<input 
-    type="text" 
-    id="account_firstname" 
-    name="account_firstname" 
-    required
-    value="<%= accountData.account_firstname %>"
->
+        <label for="account_lastname">Last Name</label>
+        <input 
+            type="text" 
+            id="account_lastname" 
+            name="account_lastname" 
+            required
+            value="<%= accountData.account_lastname %>"
+        >
 
-<label for="account_lastname">Last Name</label>
-<input 
-    type="text" 
-    id="account_lastname" 
-    name="account_lastname" 
-    required
-    value="<%= accountData.account_lastname %>"
->
+        <label for="account_email">Email</label>
+        <input 
+            type="email" 
+            id="account_email" 
+            name="account_email" 
+            required
+            value="<%= accountData.account_email %>"
+        >
 
-<label for="account_email">Email</label>
-<input 
-    type="email" 
-    id="account_email" 
-    name="account_email" 
-    required
-    value="<%= accountData.account_email %>"
->
+        <input 
+            type="hidden" 
+            name="account_id" 
+            value="<%= accountData.account_id %>"
+        >
 
-<!-- Hidden ID -->
-<input type="hidden" name="account_id" value="<%= accountData.account_id %>">
+        <button type="submit">Update Account</button>
+    </form>
+</div>
 
-<button type="submit">Update Account</button>
-</form>
+<!-- Change Password Form -->
+<div class="base-form-container">
+    <h2>Change Password</h2>
 
+    <form class="base-form" action="/account/update-password" method="post">
 
-<!-- ========================= -->
-<!-- Change Password Form      -->
-<!-- ========================= -->
-<h2>Change Password</h2>
+        <label for="accounPassword">New Password</label>
+        <div class="password-wrapper">
+            <input 
+                type="password" 
+                id="accountPassword" 
+                name="account_password" 
+                required
+                placeholder="Type your new password"
+                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+            >
+            <span id="togglePassword" class="toggle-password">Show</span>
+        </div>   
+        <p class="password-rules">
+            Password must be at least 12 characters, contain 1 capital letter, 1 number, and 1 special character.
+            <br><br>
+            * This action will change your current password.
+        </p>
 
-<form action="/account/update-password" method="post" class="account-form">
+        <input 
+            type="hidden" 
+            name="account_id" 
+            value="<%= accountData.account_id %>">
 
-<label for="account_password">New Password</label>
-<input 
-    type="password" 
-    id="account_password" 
-    name="account_password" 
-    required
-    minlength="12"
-    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
-    
-<p class="note">
-    Password must be at least 12 characters, contain 1 capital letter, 1 number, and 1 special character.
-</p>
+        <button type="submit">Change Password</button>
+    </form>
+</div>
 
-<!-- Hidden ID -->
-<input type="hidden" name="account_id" value="<%= accountData.account_id %>">
-
-<button type="submit">Change Password</button>
-</form>
+<script src="/js/register.js"></script>

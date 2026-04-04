@@ -111,7 +111,7 @@ async function accountLogin(req, res) {
       return res.redirect("/account/")
     }
     else {
-      req.flash("message notice", "The email or password you entered is incorrect.")
+      req.flash("notice", "The email or password you entered is incorrect.")
       res.status(400).render("account/login", {
         title: "Login",
         nav,
@@ -176,10 +176,24 @@ async function updateAccount(req, res) {
   )
 
   if (updateResult) {
+    // I fetch the updated account data from the database
+    const updatedAccount = await accountModel.getAccountById(account_id)
+
+    // I remove the password for security (it should never be stored in the session)
+    delete updatedAccount.account_password
+
+    // I generate a new JWT with the updated account data
+    const newToken = jwt.sign(updatedAccount, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
+
+    // I replace the old cookie with the new one
+    res.cookie("jwt", newToken, { httpOnly: true, maxAge: 3600 * 1000 })
+
+    // I update the session with the new account information
+    res.locals.accountData = updatedAccount
+
     req.flash("notice", "Account information updated successfully.")
     return res.redirect("/account/")
   }
-
   req.flash("notice", "Update failed.")
   res.render("account/update-account", {
     title: "Update Account Information",
@@ -208,7 +222,9 @@ async function updatePassword(req, res) {
     return res.redirect("/account/")
   }
 
+  console.log("FLASH PASSWORD FAIL:", "Password update failed.")
   req.flash("notice", "Password update failed.")
+
   res.render("account/update-account", {
     title: "Update Account Information",
     nav,
