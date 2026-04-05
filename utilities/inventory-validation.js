@@ -25,7 +25,7 @@ invValidate.checkClassificationData = async (req, res, next) => {
             title: "Add New Classification",
             nav,
             errors,
-            classificationForm: utilities.buildAddClassificationForm(req.body.classification_name)
+            classification_name: req.body.classification_name
         })
     }
     next()

@@ -100,50 +100,6 @@ Util.buildDetailHTML = function (vehicle) {
 
 /* ======================  Administrative HTML Builders  ====================== */
 
-/* **************************************
-* Build the management view HTML
-* ************************************ */
-Util.buildManagementHTML = function () {
-    let html = `
-        <ul class="management-links">
-            <li><a href="/inv/add-classification">Add New Classification</a></li>
-            <li><a href="/inv/add-inventory">Add New Inventory</a></li>
-        </ul>
-    `
-    return html
-}
-
-/* **************************************
-* Build the add classification form HTML
-* ************************************ */
-Util.buildAddClassificationForm = function (classification_name = "") {
-    let html = `
-
-        <div class="form-container">
-            <p class="required-msg">FIELD IS REQUIRED.</p>
-            <form action="/inv/add-classification" method="post" class="classification-form">
-
-                <label for="classification_name">Classification Name</label>
-
-                <p class="input-rules">NAME MUST BE 3-25 ALPHABETIC CHARACTERS ONLY.</p>
-
-                <input 
-                    type="text" 
-                    id="classification_name" 
-                    name="classification_name" 
-                    required
-                    pattern="^[A-Za-z]{3,25}$"
-                    title="Only alphabetic characters, 3-25 letters"
-                    value="${classification_name}"
-                >
-
-                <button type="submit">Add Classification</button>
-            </form>
-        </div>
-    `
-    return html
-}
-
 /* ****************************************
  * Build the classification select list HTML
  **************************************** */
