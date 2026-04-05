@@ -12,20 +12,20 @@
     <img src="/images/site/icon.png" alt="Company brand logo">
     <h2>Log in to your account</h2>
     <form class="base-form" action="/account/login" method="post">
-        <label for="account_email">Email</label>
+        <label for="accountEmail">Email</label>
         <input 
             type="email" 
-            id="account_email"
+            id="accountEmail"
             placeholder="Enter your email" 
             name="account_email" 
             required
             value="<%= locals.account_email %>"
         >
-        <label for="account_password">Password</label>
+        <label for="accountPassword">Password</label>
         <div class="password-wrapper">
             <input 
                 type="password" 
-                id="account_password"
+                id="accountPassword"
                 placeholder="Enter your password" 
                 name="account_password" 
                 required
@@ -39,3 +39,5 @@
         <a href="/account/register">Register here</a>
     </p>
 </div>
+
+<script src="/js/password-toggle.js"></script>
