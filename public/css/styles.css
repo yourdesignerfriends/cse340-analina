@@ -16,6 +16,23 @@ body {
   font-weight: 400;
   color: var(--secondary);
 }
+/******** All Buttons *********/
+button {
+  padding: 0.8rem;
+  font-weight: 600;
+  font-size: 1rem;
+  background-color: var(--primary);
+  color: var(--secondary);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+button:hover {
+  background-color: var(--accent);
+  color: var(--secondary);
+  box-shadow: 0 0 10px var(--primary);
+}
 /******** Header *********/
 #top-header {
   display: flex;
@@ -234,20 +251,6 @@ Update Account
 }
 .base-form button {
   margin-top: 1rem;
-  padding: 0.8rem;
-  font-weight: 600;
-  font-size: 1rem;
-  background: var(--secondary);
-  color: var(--accent);
-  border: 2px solid var(--primary);
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-.base-form button:hover {
-  background: var(--primary);
-  color: var(--secondary);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 .password-wrapper {
   position: relative;
