@@ -507,8 +507,6 @@ select {
   color: var(--secondary);
   text-align: center;
 }
-
-
 /* Large Viewports */
 @media (min-width: 768px) {
   body {
