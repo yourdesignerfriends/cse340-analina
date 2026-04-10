@@ -1,0 +1,41 @@
+<h1><%= title %></h1>
+
+<%- messages() %>
+
+<% if (errors) { %>
+    <ul class="notice">
+        <% errors.array().forEach(error => { %>
+            <li><%= error.msg %></li>
+        <% }) %>
+    </ul>
+<% } %>
+
+<div class="base-form-container">
+    <img src="/images/site/icon.png" alt="Company brand logo">
+    <h2>Write a Review</h2>
+
+    <form class="base-form" action="/reviews/add" method="post">
+
+        <input 
+            type="hidden" 
+            name="inv_id" 
+            value="<%= locals.inv_id %>"
+        >
+
+        <label for="reviewText">Your Review</label>
+        <textarea
+            id="reviewText"
+            name="review"
+            placeholder="Write your review here..."
+            required
+            minlength="3"
+            maxlength="200"
+        ><%= locals.review %></textarea>
+
+        <p class="input-rules">
+            Review must be between 3 and 200 characters.
+        </p>
+
+        <button type="submit">Submit Review</button>
+    </form>
+</div>

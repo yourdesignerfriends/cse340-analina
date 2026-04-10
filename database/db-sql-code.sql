@@ -277,3 +277,16 @@ FROM inventory i
 LEFT JOIN favorites f ON i.inv_id = f.inv_id
 GROUP BY i.inv_id, i.inv_make, i.inv_model
 ORDER BY total_favorites DESC;
+
+-- Reviews Table
+-- I created this table to store user reviews
+-- for their favorite vehicles. Each review
+-- belongs to a user and a vehicle.
+
+CREATE TABLE reviews (
+    review_id SERIAL PRIMARY KEY,
+    account_id INT NOT NULL REFERENCES account(account_id) ON DELETE CASCADE,
+    inv_id INT NOT NULL REFERENCES inventory(inv_id) ON DELETE CASCADE,
+    review_text VARCHAR(200) NOT NULL,
+    review_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

@@ -577,9 +577,9 @@ select {
   box-shadow: 0 0 6px rgba(0,0,0,0.4);
 }
 /* Favorites Button (Detail Page) */
-.favorite-form {
+.favorite-form,
+.review-form {
   margin-top: 1rem;
-  text-align: center;
 }
 .favorite-btn {
   padding: 0.7rem 1.2rem;
@@ -619,6 +619,45 @@ select {
 
 #inventoryDisplay tbody tr:nth-child(even) {
   background-color: rgba(0,0,0,0.05);
+}
+/* Reviews Section (Detail Page) */
+.vehicle-reviews {
+  margin-top: 2rem;
+  padding: 1rem 1.2rem;
+  border: 2px solid var(--secondary);
+  border-radius: 8px;
+  background-color: var(--accent);
+}
+.vehicle-reviews h3 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--secondary);
+  text-align: left;
+}
+.vehicle-reviews ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+.vehicle-reviews li {
+  padding-bottom: 0.8rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+.vehicle-reviews li:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.vehicle-reviews p {
+  margin: 0.3rem 0;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+.vehicle-reviews strong {
+  color: var(--secondary);
+  font-weight: 600;
 }
 /* Large Viewports */
 @media (min-width: 768px) {

@@ -20,6 +20,8 @@ const accountRoute = require("./routes/accountRoute")
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
 const favoritesRoute = require("./routes/favoritesRoute")
+const reviewsRoute = require("./routes/reviewsRoute")
+const adminRoute = require("./routes/adminRoute")
 
 /* ***********************
  * Middleware
@@ -64,7 +66,7 @@ app.use(static)
 /* *******************************
 * Account routes
 ******************************* */
-app.use("/account", require("./routes/accountRoute"))
+app.use("/account", accountRoute)
 
 /* *******************************
 * Index route
@@ -82,9 +84,14 @@ app.use("/inv", inventoryRoute)
 app.use("/favorites", favoritesRoute)
 
 /* *******************************
+* Reviews routes
+******************************* */
+app.use("/reviews", reviewsRoute)
+
+/* *******************************
 * Admin routes
 ******************************* */
-app.use("/admin", require("./routes/adminRoute"))
+app.use("/admin", adminRoute)
 
 /* *******************************
 * Intentional Error Route (week 3 - Task 3)

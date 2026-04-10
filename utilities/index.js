@@ -106,12 +106,58 @@ Util.buildDetailHTML = function (vehicle, isFavorite) {
                             <input type="hidden" name="inv_id" value="${vehicle.inv_id}">
                             <button type="submit" class="favorite-btn add">♡ Add to Favorites</button>
                         </form>
-                    `
+                    `  
                 }
+                <!-- ⭐ Write a Review Button -->
+                    <form action="/reviews/add" method="GET" class="review-form">
+                    <input type="hidden" name="inv_id" value="${vehicle.inv_id}">
+                    <button type="submit" class="review-btn">Write a Review</button>
+                </form>
             </div>
         </div>
     `
     return detailHTML
+}
+
+/* ***************************
+ * Build the reviews HTML
+ * I created this function to
+ * wrap all reviews for a vehicle
+ * into clean, readable HTML.
+ *************************** */
+Util.buildReviewsHTML = function (reviews) {
+    // If the vehicle has no reviews, I show a simple message.
+    if (!reviews || reviews.length === 0) {
+        return `
+        <div class="vehicle-reviews">
+            <h3>Reviews</h3>
+            <p>No reviews yet. Be the first to write one!</p>
+        </div>
+        `
+    }
+
+    // If reviews exist, I build a list with each review.
+    let html = `
+        <div class="vehicle-reviews">
+        <h3>Reviews</h3>
+        <ul>
+    `
+
+    reviews.forEach(r => {
+        html += `
+        <li>
+            <p>"${r.review_text}"</p>
+            <p><strong>${r.account_firstname}</strong> — ${new Date(r.review_date).toLocaleDateString()}</p>
+        </li>
+        `
+    })
+
+    html += `
+        </ul>
+        </div>
+    `
+
+    return html
 }
 
 /* ======================  Administrative HTML Builders  ====================== */

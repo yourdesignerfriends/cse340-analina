@@ -1,0 +1,44 @@
+<h1><%= title %></h1>
+
+<!-- Flash messages -->
+<%- messages() %>
+
+<!-- Validation or server errors -->
+<% if (errors) { %>
+    <ul class="notice">
+        <% errors.array().forEach(error => { %>
+            <li><%= error.msg %></li>
+        <% }) %>
+    </ul>
+<% } %>
+
+<div class="base-form-container">
+    <img src="/images/site/icon.png" alt="Company brand logo">
+    <h2>Your Reviews</h2>
+
+    <% if (reviews.length === 0) { %>
+        <p>You have not written any reviews yet.</p>
+    <% } else { %>
+
+        <ul class="my-reviews-list">
+            <% reviews.forEach(r => { %>
+                <li class="my-review-item">
+                    <h3><%= r.inv_year %> <%= r.inv_make %> <%= r.inv_model %></h3>
+
+                    <p class="review-text">
+                        "<%= r.review_text %>"
+                    </p>
+
+                    <p class="review-date">
+                        <%= new Date(r.review_date).toLocaleDateString() %>
+                    </p>
+
+                    <a href="/inv/detail/<%= r.inv_id %>" class="review-detail-link">
+                        View Vehicle
+                    </a>
+                </li>
+            <% }) %>
+        </ul>
+
+    <% } %>
+</div>

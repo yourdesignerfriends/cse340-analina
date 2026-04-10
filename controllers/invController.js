@@ -1,6 +1,7 @@
 const invModel = require("../models/inventory-model")
 const utilities = require("../utilities/")
 const favoritesModel = require("../models/favorites-model")
+const reviewsModel = require("../models/reviews-model")
 
 const invCont = {}
 
@@ -46,12 +47,19 @@ invCont.buildDetailView = async function (req, res, next) {
             isFavorite = await favoritesModel.checkFavorite(account_id, vehicleId)
         }
 
+        // ⭐ I get all reviews for this vehicle
+        const reviews = await reviewsModel.getReviewsByVehicle(vehicleId)
+
+        // ⭐ I build the HTML for the reviews section
+        const reviewsHTML = utilities.buildReviewsHTML(reviews)
+
         const vehicleDetailHTML = await utilities.buildDetailHTML(selectedVehicle, isFavorite)
 
         res.render("./inventory/detail", {
             title: `${selectedVehicle.inv_make} ${selectedVehicle.inv_model}`,
             nav: navigationMenu,
-            detailHTML: vehicleDetailHTML
+            detailHTML: vehicleDetailHTML,
+            reviewsHTML
         })
     }   catch (error) {
         next(error)
