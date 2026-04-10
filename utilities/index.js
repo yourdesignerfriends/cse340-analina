@@ -73,7 +73,7 @@ Util.buildClassificationGrid = async function(data){
 * Custom function that will take the specific vehicle's information and wrap it up in 
 * HTML to deliver to the view, I use backticks (template literals) to build the HTML because it is easier to read.
  * ************************** */
-Util.buildDetailHTML = function (vehicle) {
+Util.buildDetailHTML = function (vehicle, isFavorite) {
     let detailHTML = `
         <div class="vehicle-detail-layout"> 
             <img class="vehicle-image"
@@ -92,6 +92,22 @@ Util.buildDetailHTML = function (vehicle) {
                     <p class="info-item"><span class="info-label">Color: </span>${vehicle.inv_color}</p>
                     <p class="info-item"><span class="info-label">Miles: </span>${new Intl.NumberFormat().format(vehicle.inv_miles)}</p>
                 </div>
+                <!-- ⭐ Dynamic Favorites Button -->
+                ${
+                    isFavorite
+                    ? `
+                        <form action="/favorites/remove" method="POST" class="favorite-form">
+                            <input type="hidden" name="inv_id" value="${vehicle.inv_id}">
+                            <button type="submit" class="favorite-btn remove">♥ Remove from Favorites</button>
+                        </form>
+                    `
+                    : `
+                        <form action="/favorites/add" method="POST" class="favorite-form">
+                            <input type="hidden" name="inv_id" value="${vehicle.inv_id}">
+                            <button type="submit" class="favorite-btn add">♡ Add to Favorites</button>
+                        </form>
+                    `
+                }
             </div>
         </div>
     `

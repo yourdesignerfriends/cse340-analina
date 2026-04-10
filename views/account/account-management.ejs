@@ -16,10 +16,21 @@
         <a href="/account/update/<%= accountId %>">Edit Account Information</a>
     </p>
 
+    <!-- Favorites link (visible for all users) -->
+    <p>
+        <a href="/favorites">My Favorites</a>
+    </p>
+
     <!-- Inventory management only for Employee/Admin -->
     <% if (accountType === "Employee" || accountType === "Admin") { %>
         <p>
             <a href="/inv/">Manage Inventory</a>
+        </p>
+    <% } %>
+    <!-- Favorite Stats (Admin only) -->
+    <% if (accountType === "Admin") { %>
+        <p>
+            <a href="/admin/favorite-stats">Favorite Stats</a>
         </p>
     <% } %>
 </div>

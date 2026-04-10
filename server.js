@@ -19,6 +19,7 @@ const pool = require('./database/')
 const accountRoute = require("./routes/accountRoute")
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
+const favoritesRoute = require("./routes/favoritesRoute")
 
 /* ***********************
  * Middleware
@@ -74,6 +75,16 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 * Inventory routes
 ******************************* */
 app.use("/inv", inventoryRoute)
+
+/* *******************************
+* Favorites routes
+******************************* */
+app.use("/favorites", favoritesRoute)
+
+/* *******************************
+* Admin routes
+******************************* */
+app.use("/admin", require("./routes/adminRoute"))
 
 /* *******************************
 * Intentional Error Route (week 3 - Task 3)

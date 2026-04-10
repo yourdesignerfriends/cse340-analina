@@ -1,0 +1,52 @@
+<%- include('../partials/header.ejs') %>
+
+<% if (title) { %>
+    <h1><%= title %></h1>
+<% } else { 
+    res.redirect('/') 
+} %>
+
+<%- messages() %>
+
+<% const list = favorites || [] %>
+
+<div class="favorites-container">
+
+    <% if (list.length === 0) { %>
+        <p class="notice">You have no favorite vehicles yet.</p>
+    <% } else { %>
+
+        <ul class="favorites-list">
+            <% list.forEach(vehicle => { %>
+                <li class="favorite-item">
+
+                    <div class="favorite-image">
+                        <img src="<%= vehicle.inv_thumbnail %>" 
+                             alt="<%= vehicle.inv_make %> <%= vehicle.inv_model %>">
+                    </div>
+
+                    <div class="favorite-info">
+                        <h2><%= vehicle.inv_year %> <%= vehicle.inv_make %> <%= vehicle.inv_model %></h2>
+
+                        <p><strong>Price:</strong> $<%= vehicle.inv_price %></p>
+                        <p><strong>Color:</strong> <%= vehicle.inv_color %></p>
+
+                        <a class="details-link" href="/inv/detail/<%= vehicle.inv_id %>">
+                            View Details
+                        </a>
+
+                        <form action="/favorites/remove" method="POST" class="remove-favorite-form">
+                            <input type="hidden" name="inv_id" value="<%= vehicle.inv_id %>">
+                            <button type="submit" class="remove-btn">Remove from Favorites</button>
+                        </form>
+                    </div>
+
+                </li>
+            <% }) %>
+        </ul>
+
+    <% } %>
+
+</div>
+
+<%- include('../partials/footer.ejs') %>
